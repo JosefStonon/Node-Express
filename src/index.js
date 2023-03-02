@@ -1,9 +1,8 @@
 const express = require('express');
-
-const routes = require('./router');
+const router = require('./router');
 
 const app = express();
 
-app.use(routes);
+app.use(router);
 
-app.listen(3001, () => console.log('🔥Server has been started at http://localhost:3001'));
+app.listen(3001, () => console.log('🔥 Server has benn started at http://localhost:3001'));
