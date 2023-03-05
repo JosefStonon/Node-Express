@@ -4,8 +4,9 @@ const ContactController = require('./app/Controllers/ContactController');
 
 const router = Router();
 
-router.get('/contacts', ContactController.index);
-router.get('/contacts/:id', ContactController.show);
-router.delete('/contacts/:id', ContactController.delete);
+router.get('/contact', ContactController.index);
+router.get('/contact/:id', ContactController.show);
+router.delete('/contact/:id', ContactController.delete);
+router.post('/contact', ContactController.store);
 
 module.exports = router;

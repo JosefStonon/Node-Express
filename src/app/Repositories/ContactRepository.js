@@ -4,22 +4,22 @@ let contacts = [
   {
     id: v4(),
     name: 'josef',
-    email: 'josef.sartori@hotmail.com',
-    phone: '879365352',
+    email: 'josef@hotmail.com',
+    phone: '8576895734',
     category_id: v4(),
   },
   {
     id: v4(),
-    name: 'maria',
-    email: 'maria@hotmail.com',
-    phone: '87935365352',
+    name: 'amanda',
+    email: 'amanda@hotmail.com',
+    phone: '85768534595734',
     category_id: v4(),
   },
   {
     id: v4(),
-    name: 'tiao',
-    email: 'tiao@hotmail.com',
-    phone: '872349365352',
+    name: 'lorenzo',
+    email: 'lorenzo@hotmail.com',
+    phone: '8574356895734',
     category_id: v4(),
   },
 ];
@@ -35,10 +35,34 @@ class ContactRepository {
     ));
   }
 
-  delete(id) {
+  findByEmail(email) {
+    return new Promise((resolve) => resolve(
+      contacts.find((contact) => contact.email === email),
+    ));
+  }
+
+  deleteById(id) {
     return new Promise((resolve) => {
       contacts = contacts.filter((contact) => contact.id !== id);
+
       resolve();
+    });
+  }
+
+  create({
+    name, email, phone, category_id,
+  }) {
+    return new Promise((resolve) => {
+      const newContact = {
+        id: v4(),
+        name,
+        email,
+        phone,
+        category_id,
+      };
+
+      contacts.push(newContact);
+      resolve(newContact);
     });
   }
 }
