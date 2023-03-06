@@ -3,23 +3,23 @@ const { v4 } = require('uuid');
 let contacts = [
   {
     id: v4(),
-    name: 'josef',
-    email: 'josef@hotmail.com',
-    phone: '8576895734',
+    name: 'jose',
+    email: 'jose@email.com',
+    phone: '843658743',
     category_id: v4(),
   },
   {
     id: v4(),
-    name: 'amanda',
-    email: 'amanda@hotmail.com',
-    phone: '85768534595734',
+    name: 'vitor',
+    email: 'vitor@email.com',
+    phone: '843654238743',
     category_id: v4(),
   },
   {
     id: v4(),
-    name: 'lorenzo',
-    email: 'lorenzo@hotmail.com',
-    phone: '8574356895734',
+    name: 'maria',
+    email: 'maria@email.com',
+    phone: '843652438743',
     category_id: v4(),
   },
 ];
@@ -41,14 +41,6 @@ class ContactRepository {
     ));
   }
 
-  deleteById(id) {
-    return new Promise((resolve) => {
-      contacts = contacts.filter((contact) => contact.id !== id);
-
-      resolve();
-    });
-  }
-
   create({
     name, email, phone, category_id,
   }) {
@@ -60,9 +52,36 @@ class ContactRepository {
         phone,
         category_id,
       };
-
       contacts.push(newContact);
+
       resolve(newContact);
+    });
+  }
+
+  update(id, {
+    name, email, phone, category_id,
+  }) {
+    return new Promise((resolve) => {
+      const updatedContact = {
+        id: v4(),
+        name,
+        email,
+        phone,
+        category_id,
+      };
+
+      contacts = contacts.map((contact) => (
+        contact.id === id ? updatedContact : contact
+      ));
+
+      resolve(updatedContact);
+    });
+  }
+
+  deleteById(id) {
+    return new Promise((resolve) => {
+      contacts = contacts.filter((contact) => contact.id !== id);
+      resolve(contacts);
     });
   }
 }
