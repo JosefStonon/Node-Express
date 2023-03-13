@@ -5,8 +5,8 @@ const router = Router();
 
 router.get('/contact', ContactController.index);
 router.get('/contact/:id', ContactController.show);
-router.delete('/contact/:id', ContactController.delete);
-router.post('/contact', ContactController.store);
+router.post('/contact/', ContactController.store);
 router.put('/contact/:id', ContactController.update);
+router.delete('/contact/:id', ContactController.delete);
 
 module.exports = router;

@@ -5,12 +5,12 @@ const client = new Client({
   port: 5432,
   user: 'root',
   password: 'root',
-  databse: 'mycontacts',
+  database: 'mycontacts',
 });
 
 client.connect();
 
-exports.query = async (query, values) => {
-  const { rows } = await client.query(query, values);
+exports.query = async (query) => {
+  const { rows } = await client.query(query);
   return rows;
 };
