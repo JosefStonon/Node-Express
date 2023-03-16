@@ -4,12 +4,14 @@ class ContactController {
   async index(req, res) {
     const { orderBy } = req.query;
     const contact = await ContactRepository.findAll(orderBy);
+
     res.json(contact);
   }
 
   async show(req, res) {
     const { id } = req.params;
-    const contact = ContactRepository.findById(id);
+
+    const contact = await ContactRepository.findById(id);
 
     if (!contact) {
       res.status(404).json({ error: 'Contact not found!' });
@@ -26,11 +28,11 @@ class ContactController {
     const contactExist = await ContactRepository.findByEmail(email);
 
     if (contactExist) {
-      res.status(404).json({ error: 'Email is already in use!' });
+      res.status(404).json({ error: 'This contact is already in use!' });
     }
 
     if (!name) {
-      res.Status(404).json({ error: 'Name is required!' });
+      res.status(404).json({ error: 'Name is required!' });
     }
 
     const contact = await ContactRepository.create({
@@ -56,17 +58,17 @@ class ContactController {
       res.status(404).json({ error: 'Name is required!' });
     }
 
-    const contactEmailExist = await ContactRepository.findByEmail(email);
+    const contactExistEmail = await ContactRepository.findByEmail(email);
 
-    if (contactEmailExist && contactEmailExist.id !== id) {
+    if (contactExistEmail && contactExistEmail.id !== id) {
       res.status(404).json({ error: 'This Email is already in use!' });
     }
 
-    const contacts = await ContactRepository.update(id, {
+    const contact = await ContactRepository.Update(id, {
       name, email, phone, category_id,
     });
 
-    res.json(contacts);
+    res.json(contact);
   }
 
   async delete(req, res) {
@@ -75,12 +77,12 @@ class ContactController {
     const contactExist = await ContactRepository.findById(id);
 
     if (!contactExist) {
-      res.status(404).json({ error: 'Contact not found' });
+      res.status(404).json({ error: 'Contact not found!' });
     }
 
     await ContactRepository.Delete(id);
 
-    res.sendStatus(200);
+    res.sendStatus(204);
   }
 }
 

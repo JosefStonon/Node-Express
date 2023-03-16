@@ -1,18 +1,20 @@
-CREATE DATABASE mycontacts;
+    CREATE DATABASE mycontacts;
 
-EXTENSION CREATE IF NOT EXISTS 'uuid-ossp';
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE IF NOT EXISTS categories (
-    id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
-    name VARCHAR NOT NULL
-);
+    CREATE TABLE IF NOT EXISTS categories (
+        id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+        name VARCHAR NOT NULL
+    );
 
-CREATE TABLE IF NOT EXISTS contacts (
-    id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
-    name VARCHAR NOT NULL,
-    email VARCHAR NOT NULL UNIQUE,
-    phone VARCHAR,
-    category_id  UUID,
+    CREATE TABLE IF NOT EXISTS contacts (
+        id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+        name VARCHAR NOT NULL,
+        email VARCHAR NOT NULL UNIQUE,
+        phone VARCHAR,
+        category_id UUID,
 
-    FOREIGN KEY (category_id) REFERENCES categories(id)
-)
+        FOREIGN KEY (category_id) REFERENCES categories(id)
+    );
+
+
