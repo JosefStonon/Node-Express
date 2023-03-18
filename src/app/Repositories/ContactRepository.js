@@ -2,23 +2,26 @@ const db = require('../../DataBase/index');
 
 class ContactRepository {
   async findAll(orderBy = 'ASC') {
-    const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
-    const row = await db.query(`
-            SELECT * FROM contacts ORDER BY name ${direction}
+    const dirction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
+    const rows = await db.query(`
+            SELECT contacts.* categories.name AS category_name
+            FROM contacts
+            JOIN categories ON categories.id = category_id
+            ORDER BY contacts.name ${dirction}
         `);
-    return row;
+    return rows;
   }
 
   async findById(id) {
     const [row] = await db.query(`
-            SELECT * FROM contacts WHERE id = $1
+        SELECT * FROM contacts WHERE id = $1
     `, [id]);
     return row;
   }
 
   async findByEmail(email) {
     const [row] = await db.query(`
-            SELECT * FROM contacts WHERE email = $1
+        SELECT * FROM contacts WHERE email = $1
     `, [email]);
     return row;
   }
@@ -27,14 +30,14 @@ class ContactRepository {
     name, email, phone, category_id,
   }) {
     const [row] = await db.query(`
-            INSERT INTO contacts (name, email, phone, category_id)
-            VALUES($1, $2, $3, $4)
-            RETURNING *
+        INSERT INTO contacts(name, email, phone, category_id)
+        VALUES($1, $2, $3, $4)
+        RETURNING *
     `, [name, email, phone, category_id]);
     return row;
   }
 
-  async Update(id, {
+  async update(id, {
     name, email, phone, category_id,
   }) {
     const [row] = await db.query(`
@@ -43,12 +46,15 @@ class ContactRepository {
         WHERE id = $5
         RETURNING *
     `, [name, email, phone, category_id, id]);
+
     return row;
   }
 
   async Delete(id) {
-    const deleteObj = await db.query('DELETE FROM contacts WHERE id = $1', [id]);
-    return deleteObj;
+    const deletObj = await db.query(`
+        DELETE FROM contacts WHERE id = $1
+    `, [id]);
+    return deletObj;
   }
 }
 
