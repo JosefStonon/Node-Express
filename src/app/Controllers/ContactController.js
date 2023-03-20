@@ -34,6 +34,10 @@ class ContactController {
       res.status(404).json({ error: 'Name is required!' });
     }
 
+    if (!category_id) {
+      res.status(404).json({ error: 'Category_id is required!' });
+    }
+
     const contact = await ContactRepository.create({
       name, email, phone, category_id,
     });
