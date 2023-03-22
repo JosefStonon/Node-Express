@@ -16,6 +16,8 @@ module.exports = {
     'no-promise-executor-return': 'off',
     camelcase: 'off',
     'no-console': 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    'import/no-extraneous-dependencies': ['error', { argsIgnorePattern: 'import/no-extraneous-dependencies' }],
 
   },
 };

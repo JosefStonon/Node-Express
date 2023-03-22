@@ -22,13 +22,13 @@ class CategoryController {
     const { name } = req.body;
 
     if (!name) {
-      res.status(404).json({ error: 'Name is required!' });
+      res.status(400).json({ error: 'Name is required!' });
     }
 
     const findByName = await CategoryRepository.findByName(name);
 
     if (findByName) {
-      return res.status(400).json({ error: 'Name is already exists!' });
+      return res.status(400).json({ error: 'Category is already exists!' });
     }
 
     const categ = await CategoryRepository.create({ name });
