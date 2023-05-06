@@ -6,7 +6,7 @@
   "author": "JosefStonon <josef.sartori@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "dev": "nodemon src/index.js"
   },
   "dependencies": {
     "express": "^4.18.2",

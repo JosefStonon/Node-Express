@@ -4,6 +4,8 @@ class ContactController {
   async index(req, res) {
     const { orderBy } = req.query;
     const contact = await ContactRepository.findAll(orderBy);
+
+console.log({contact})
     res.json(contact);
   }
 
