@@ -1,12 +1,20 @@
 const { Router } = require('express');
+
 const ContactController = require('./app/Controllers/ContactController');
+const CategoryController = require('./app/Controllers/CategoryController');
 
-const router = Router();
+const route = Router();
 
-router.get('/contact', ContactController.index);
-router.get('/contact/:id', ContactController.show);
-router.post('/contact/', ContactController.store);
-router.put('/contact/:id', ContactController.update);
-router.delete('/contact/:id', ContactController.delete);
+route.get('/contact', ContactController.index);
+route.get('/contact/:id', ContactController.show);
+route.post('/contact', ContactController.store);
+route.put('/contact/:id', ContactController.update);
+route.delete('/contact/:id', ContactController.delete);
 
-module.exports = router;
+route.get('/category', CategoryController.index);
+route.get('/category/:id', CategoryController.show);
+route.post('/category', CategoryController.store);
+route.put('/category/:id', CategoryController.update);
+route.delete('/category/:id', CategoryController.delete);
+
+module.exports = route;

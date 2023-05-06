@@ -1,9 +1,16 @@
 const express = require('express');
-const router = require('./router');
+require('express-async-errors');
+
+const route = require('./router');
 
 const app = express();
 
 app.use(express.json());
-app.use(router);
+app.use(route);
+app.use((error, req, res, next) => {
+  console.log('##### Error Handler');
+  console.log(error);
+  res.sendStatus(500);
+});
 
-app.listen(3001, () => console.log('🔥 Server has been started at htpp://localhost:3001'));
+app.listen(3001, () => console.log('🔥 Server has been started at http://localhost:3001'));
