@@ -41,9 +41,12 @@ class ContactController {
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> c1771703816198969943e8816b746bcb304ac66b
     if (email) {
 
         const contactExist = await ContactRepository.findByEmail(email);
