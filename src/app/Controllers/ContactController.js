@@ -42,9 +42,7 @@ class ContactController {
 
 
 
-    if (!category_id) {
-      res.status(404).json({ error: 'Category_id is required!' });
-    }
+
 
     if (email) {
 
